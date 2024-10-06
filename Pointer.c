@@ -9,7 +9,7 @@ int main(void)
     printf("%p\n",pa);//'%p'为地址的格式匹配符
     printf("%p\n",pb);
 
-    *pa = 20;//解引用操作符'*(name)'，通过(name)中存放的地址，找到(name)所指向的对象，'*'
+    *pa = 20;//解引用操作符'*(name)'，通过(name)中存放的地址，找到(name)所指向的对象，'*(name)'就是(name)所指向的对象
     printf("%d\n",a);
 
     printf("%d\n",sizeof(int*));
