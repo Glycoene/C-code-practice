@@ -119,6 +119,31 @@ int main(void)
             printf("选择错误\n");
             break;
     }
+    
+    // while循环
+    int c = 1;
+    while (c <= 10)
+    {
+        if (c == 5)
+        {
+            break;// break为跳出整个循环，只会作用于whlie循环，对于if语句没有意义
+        }
+        printf("%d\n",c);
+        c++;
+    }
+
+    c = 1;
+
+    while (c <= 10)
+    {
+        c++;
+        if (c == 5)
+        {
+            continue;// continue为继续执行循环，会跳过之后的代码直接判断是否执行下一次循环
+        }
+        printf("%d\n",c);
+    }
+
 
     system("pause");
     return 0;
