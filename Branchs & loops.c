@@ -121,29 +121,55 @@ int main(void)
     }
     
     // while循环
-    int c = 1;
-    while (c <= 10)
+    int c = 1;// 初始化
+    while (c <= 10)// 条件判断
     {
         if (c == 5)
         {
             break;// break为跳出整个循环，只会作用于whlie循环，对于if语句没有意义
         }
         printf("%d\n",c);
-        c++;
+        c++;// 调整
     }
 
-    c = 1;
+    c = 1;// 初始化
 
-    while (c <= 10)
+    while (c <= 10)// 条件判断
     {
-        c++;
+        c++;// 调整
         if (c == 5)
         {
             continue;// continue为继续执行循环，会跳过之后的代码直接判断是否执行下一次循环
         }
         printf("%d\n",c);
     }
+    // 有时while循环中的初始化语句、条件判断语句、调整语句会离得很远，调整起来比较麻烦
+    // 此时可以用for循环
 
+    // for循环
+    // for (初始化表达式;条件判断表达式;调整表达式)
+    // {
+    //     循环语句;
+    // }
+    // 执行顺序为：初始化 -> 条件判断 -> 循环语句 -> 调整 -> 循环
+    // for循环是最常用的循环
+    for (c = 1; c <= 10; c++)
+    {
+        if (c == 5)
+        {
+            break;// break为跳出整个循环，与在while循环中作用相同
+        }
+        printf("%d\n",c);
+    }
+
+    for (c = 1; c <= 10; c++)
+    {
+        if (c == 5)
+        {
+            continue;// continue为继续执行循环，与在while循环中不同的是，在while循环中会跳过之后的所有循环语句包括调整语句，而在for循环中会直接跳转到调整表达式
+        }
+        printf("%d\n",c);
+    }
 
     system("pause");
     return 0;
