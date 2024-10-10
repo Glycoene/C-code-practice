@@ -171,6 +171,18 @@ int main(void)
         printf("%d\n",c);
     }
 
+    for (;;)// 当条件判断省略，意味着判断恒成立
+    {
+        printf("hehe\n");
+    }
+    // 初始化、条件判断、调整都可省略，不过要考虑后果
+
+    int x,y;
+    for (x = 0, y = 0;x < 2 && y < 5;++x, y++)// 用多个变量控制循环
+    {
+        printf("hehe\n");
+    }
+
     system("pause");
     return 0;
 }
