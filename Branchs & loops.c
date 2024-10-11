@@ -174,6 +174,7 @@ int main(void)
     for (;;)// 当条件判断省略，意味着判断恒成立
     {
         printf("hehe\n");
+        break;
     }
     // 初始化、条件判断、调整都可省略，不过要考虑后果
 
@@ -182,6 +183,36 @@ int main(void)
     {
         printf("hehe\n");
     }
+
+    // do-while循环
+    // do
+    // {
+    //     循环语句;
+    // } while (条件判断表达式);
+    // 循环至少执行一次，使用场景有限，所以不经常使用
+    int d = 1;
+    do
+    {
+        if (d == 5)
+        {
+            break;// break为跳出整个循环，只会作用于do-whlie循环，对于if语句没有意义
+        }
+        printf("%d\n",d);
+        d++;
+    } while (d <= 10);
+
+    int d = 1;
+    do
+    {
+        if (d == 5)
+        {
+            continue;// continue为继续执行循环，会跳过之后的代码直接判断是否执行下一次循环
+        }
+        printf("%d\n",d);
+        d++;
+    } while (d <= 10);
+
+    // 三种循环用的最多的是for，其次是while，最少的是do-while
 
     system("pause");
     return 0;
