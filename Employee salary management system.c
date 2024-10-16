@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define N_of_E 16
+
 struct clerk
 {
     int num;
@@ -13,19 +15,20 @@ struct clerk
     float pay_f;
 };
 
-struct clerk arr[16];
+struct clerk arr[N_of_E];
 
 void Menu()
 {
     system("cls");
 
-    printf("    员工工资管理系统    \n");
-    printf("-----------------------\n");
-    printf("    1. 录入员工数据     \n");
-    printf("    2. 删除员工数据     \n");
-    printf("    3. 修改员工数据     \n");
-    printf("    0. 退出程序         \n");
-    printf("-----------------------\n");
+    printf("      员工工资管理系统      \n");
+    printf("---------------------------\n");
+    printf("      1. 录入员工数据       \n");
+    printf("      2. 删除员工数据       \n");
+    printf("      3. 修改员工数据       \n");
+    printf("      4. 显示全部员工数据    \n");
+    printf("      0. 退出程序           \n");
+    printf("---------------------------\n");
 }
 
 void Key_in()
@@ -36,14 +39,14 @@ void Key_in()
         system("cls");
         printf("请输入员工编号：");
         scanf("%d",&num);
-        for (int cdt2 = 0; cdt2 <= 15; cdt2++)
+        for (int cdt2 = 0; cdt2 <= N_of_E-1; cdt2++)
         {
             if (arr[cdt2].num == num)
             {
                 printf("该编号已被录入，请输入其他编号\n");
                 break;
             }
-            else if (arr[cdt2].num != num && cdt2 == 15)
+            else if (arr[cdt2].num != num && cdt2 == N_of_E-1)
             {
                 arr[num-1].num = num;
 
@@ -91,7 +94,7 @@ void Delete()
         system("cls");
         printf("请输入要删除员工的名字：");
         scanf("%s",name);
-        for (int cdt2 = 0; cdt2 <= 15; cdt2++)
+        for (int cdt2 = 0; cdt2 <= N_of_E-1; cdt2++)
         {
             if (strcmp(arr[cdt2].name, name) == 0)
             {
@@ -105,8 +108,8 @@ void Delete()
                 if (ans == 'y')
                 {
                     arr[cdt2].num = 0;
-                    strcpy(arr[cdt2].name, "0");
-                    strcpy(arr[cdt2].dep, "0");
+                    strcpy(arr[cdt2].name, "\0");
+                    strcpy(arr[cdt2].dep, "\0");
                     arr[cdt2].pay_s = 0;
                     arr[cdt2].ins = 0;
                     arr[cdt2].tax = 0;
@@ -120,7 +123,7 @@ void Delete()
                     break;
                 }
             }
-            else if (strcmp(arr[cdt2].name, name) != 0 && cdt2 == 15)
+            else if (strcmp(arr[cdt2].name, name) != 0 && cdt2 == N_of_E-1)
             {
                 printf("未找到员工 %s 的数据\n",name);
                 break;
@@ -143,7 +146,7 @@ void Revise()
         system("cls");
         printf("请输入要修改员工的名字：");
         scanf("%s",name);
-        for (int cdt2 = 0; cdt2 <= 15; cdt2++)
+        for (int cdt2 = 0; cdt2 <= N_of_E-1; cdt2++)
         {
             if (strcmp(arr[cdt2].name, name) == 0)
             {
@@ -243,7 +246,7 @@ void Revise()
                     break;
                 }
             }
-            else if (strcmp(arr[cdt2].name, name) != 0 && cdt2 == 15)
+            else if (strcmp(arr[cdt2].name, name) != 0 && cdt2 == N_of_E-1)
             {
                 printf("未找到员工 %s 的数据\n",name);
                 break;
@@ -258,13 +261,28 @@ void Revise()
     }
 }
 
+void Display()
+{
+    system("cls");
+    printf("以下为所有员工的数据：\n");
+    printf("---------------------------------------------------------------------------------------\n");
+    for (int cdt1 = 0; cdt1 <= N_of_E-1; cdt1++)
+    {
+        printf("编号:%d  姓名:%s  部门:%s  ", arr[cdt1].num, arr[cdt1].name, arr[cdt1].dep);
+        printf("应付工资:%.2f  保险:%.2f  税金:%.2f  ", arr[cdt1].pay_s, arr[cdt1].ins, arr[cdt1].tax);
+        printf("实付工资:%.2f\n", arr[cdt1].pay_f);
+        printf("---------------------------------------------------------------------------------------\n");
+    }
+    system("pause");
+}
+
 int main()
 {
     int ans = 1;
     while (ans)
     {
         Menu();
-        printf("请选择(0~3)：");
+        printf("请选择(0~4)：");
         scanf("%d",&ans);
         switch (ans)
         {
@@ -277,10 +295,12 @@ int main()
             case 3:
                 Revise();
                 break;
+            case 4:
+                Display();
+                break;
             default:
                 break;
         }
     }
-
     return 0;
 }
