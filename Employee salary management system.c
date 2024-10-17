@@ -20,23 +20,23 @@ struct clerk arr[N_of_E];
 void Menu()
 {
     system("cls");
-
-    printf("      员工工资管理系统      \n");
-    printf("---------------------------\n");
-    printf("      1. 录入员工数据       \n");
-    printf("      2. 删除员工数据       \n");
-    printf("      3. 修改员工数据       \n");
+    printf("      员工工资管理系统       \n");
+    printf("----------------------------\n");
+    printf("      1. 录入员工数据        \n");
+    printf("      2. 删除员工数据        \n");
+    printf("      3. 修改员工数据        \n");
     printf("      4. 显示全部员工数据    \n");
-    printf("      0. 退出程序           \n");
-    printf("---------------------------\n");
+    printf("      5. 查询员工数据        \n");
+    printf("      0. 退出程序            \n");
+    printf("----------------------------\n");
 }
 
 void Key_in()
 {
     for (char cdt1 = 'y'; cdt1 == 'y'; )
     {
-        int num;
         system("cls");
+        int num;
         printf("请输入员工编号：");
         scanf("%d",&num);
         for (int cdt2 = 0; cdt2 <= N_of_E-1; cdt2++)
@@ -77,7 +77,7 @@ void Key_in()
                 break;
             }
         }
-        printf("是否继续录入员工数据（y/n）：");
+        printf("\n是否继续录入员工数据（y/n）：");
         while (getchar() != '\n')
         {
             ;
@@ -90,8 +90,8 @@ void Delete()
 {
     for (char cdt1 = 'y'; cdt1 == 'y'; )
     {
-        char name[16];
         system("cls");
+        char name[16];
         printf("请输入要删除员工的名字：");
         scanf("%s",name);
         for (int cdt2 = 0; cdt2 <= N_of_E-1; cdt2++)
@@ -142,8 +142,8 @@ void Revise()
 {
     for (char cdt1 = 'y'; cdt1 == 'y'; )
     {
-        char name[16];
         system("cls");
+        char name[16];
         printf("请输入要修改员工的名字：");
         scanf("%s",name);
         for (int cdt2 = 0; cdt2 <= N_of_E-1; cdt2++)
@@ -165,9 +165,9 @@ void Revise()
                 printf("实付工资：%.2f\n",arr[cdt2].pay_f);
                 for (char ans2 = 'y'; ans2 == 'y'; )
                 {
-                    printf("\n请选择要修改的数据：\n");
                     int ans1;
-                    printf("1. 部门\n2. 应付工资\n3. 保险\n4. 税金\n");
+                    printf("\n1. 部门\n2. 应付工资\n3. 保险\n4. 税金\n");
+                    printf("请选择要修改的数据(1~4)：");
                     scanf("%d",&ans1);
                     if (ans1 == 1)
                     {
@@ -276,13 +276,93 @@ void Display()
     system("pause");
 }
 
+void Inquire()
+{
+    for (char cdt1 = 'y'; cdt1 == 'y'; )
+    {
+        system("cls");
+        int ans;
+        printf("1. 根据员工姓名查询\n2. 根据部门查询\n");
+        printf("请选择要查询的数据(1~2)：");
+        scanf("%d",&ans);
+        if (ans == 1)
+        {
+            system("cls");
+            char name[16];
+            printf("请输入要查询的姓名：");
+            scanf("%s",name);
+            for (int cdt2 = 0; cdt2 <= N_of_E-1; cdt2++)
+            {
+                if (strcmp(arr[cdt2].name, name) == 0)
+                {
+                    printf("\n该员工的数据如下\n");
+                    printf("编号：%d\n",arr[cdt2].num);
+                    printf("姓名：%s\n",arr[cdt2].name);
+                    printf("部门：%s\n",arr[cdt2].dep);
+                    printf("应付工资：%.2f\n",arr[cdt2].pay_s);
+                    printf("保险：%.2f\n",arr[cdt2].ins);
+                    printf("税金：%.2f\n",arr[cdt2].tax);
+                    printf("实付工资：%.2f\n",arr[cdt2].pay_f);
+                    break;
+                }
+                else if (strcmp(arr[cdt2].name, name) != 0 && cdt2 == N_of_E-1)
+                {
+                    printf("未找到员工 %s 的数据\n",name);
+                    break;
+                }
+            }
+        }
+        else if (ans == 2)
+        {
+            system("cls");
+            char dep[16];
+            printf("请输入要查询的部门：");
+            scanf("%s",dep);
+            int N_of_P_in_D = 0;
+            float pay_all = 0;
+            float pay_avrg = 0;
+            printf("\n该部门的数据如下\n");
+            printf("---------------------------------------------------------------------------------------\n");
+            for (int cdt3 = 0; cdt3 <= N_of_E-1; cdt3++)
+            {
+                if (strcmp(arr[cdt3].dep, dep) == 0)
+                {
+                    printf("编号:%d  姓名:%s  部门:%s  ", arr[cdt3].num, arr[cdt3].name, arr[cdt3].dep);
+                    printf("应付工资:%.2f  保险:%.2f  税金:%.2f  ", arr[cdt3].pay_s, arr[cdt3].ins, arr[cdt3].tax);
+                    printf("实付工资:%.2f\n", arr[cdt3].pay_f);
+                    printf("---------------------------------------------------------------------------------------\n");
+                    N_of_P_in_D++;
+                    pay_all += arr[cdt3].pay_f;
+                    pay_avrg = pay_all / N_of_P_in_D;
+                }
+            }
+            if (N_of_P_in_D == 0)
+            {
+                printf("未找到部门 %s 的数据\n",dep);
+                printf("---------------------------------------------------------------------------------------\n");
+            }
+            else
+            {
+                printf("部门人数:%d  工资总额:%.2f  平均工资:%.2f\n", N_of_P_in_D, pay_all, pay_avrg);
+                printf("---------------------------------------------------------------------------------------\n");
+            }
+        }
+        printf("\n是否继续查询(y/n)：");
+        while (getchar() != '\n')
+        {
+            ;
+        }
+        scanf("%c",&cdt1);
+    }
+}
+
 int main()
 {
     int ans = 1;
     while (ans)
     {
         Menu();
-        printf("请选择(0~4)：");
+        printf("请选择(0~5)：");
         scanf("%d",&ans);
         switch (ans)
         {
@@ -297,6 +377,9 @@ int main()
                 break;
             case 4:
                 Display();
+                break;
+            case 5:
+                Inquire();
                 break;
             default:
                 break;
