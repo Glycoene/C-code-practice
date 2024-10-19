@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 
 int main()
 {
-    unsigned int ans;
+    int ans;
+    again:
     printf("请输入正方形的边长：");
-    scanf("%u",&ans);
+    scanf("%d",&ans);
     if (ans >= 1)
     {
         for (int i = 0; i < ans; i++)
@@ -28,6 +28,11 @@ int main()
             printf("* ");
         }
         printf("\n");
+    }
+    else
+    {
+        printf("无法生成\n");
+        goto again;
     }
 
     system("pause");
