@@ -108,8 +108,8 @@ void Delete()
                 if (ans == 'y')
                 {
                     arr[cdt2].num = 0;
-                    strcpy(arr[cdt2].name, "\0");
-                    strcpy(arr[cdt2].dep, "\0");
+                    strcpy(arr[cdt2].name, "");
+                    strcpy(arr[cdt2].dep, "");
                     arr[cdt2].pay_s = 0;
                     arr[cdt2].ins = 0;
                     arr[cdt2].tax = 0;

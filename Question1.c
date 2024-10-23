@@ -3,15 +3,15 @@
 
 int main()
 {
-    char arr[32];
+    char arr[64];
     printf("请输入字符串：");
-    scanf("%s",arr);
+    gets(arr);
     int ans = 0;
     for (int i = 0; arr[i] != '\0'; i++)
     {
         if (48<= arr[i] && arr[i] <= 57)
         {
-            ans += (arr[i] - 48);
+            ans += arr[i] - 48;
         }
     }
     printf("字符串中所有数字的和：%d\n",ans);
